@@ -1,17 +1,18 @@
-var Letter = function(char, placeholder, guessed, actualLetter) {
+var Letter = function(char) {
     this.char = char
-    this.actualLetter = actualLetter
-    this.placeholder = placeholder
-    this.guessed = guessed
-    this.wasGuessed = function() {
-        char = placeholder
-        if (this.guessed) {
-            char = actualLetter
+    this.guessed = false
+    
+    this.display = function() {
+        if (!this.guessed) {
+            return "_"
+        }
+        else {
+            return this.char
         }
     }
-    this.check = function(letter) {
-        if (letter === actualLetter) {
-            guessed = true
+    this.check = function(userInput) {
+        if (userInput === char) {
+            this.guessed = true
         }
     }
 }
