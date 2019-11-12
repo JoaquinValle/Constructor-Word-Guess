@@ -16,6 +16,7 @@ var Letter = function(char) {
     this.check = function(userInput) {
         if (userInput === this.char) {
             this.guessed = true
+            return true
         }
     }
 }

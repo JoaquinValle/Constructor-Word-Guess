@@ -9,27 +9,33 @@ var currentWord = new Word(randWord)
 
 currentWord.makeWord()
 currentWord.displayWord()
-
+console.log(currentWord.constructedWord.length)
 var guessCounter = 0
 
 function game() {
-    if (guessCounter < 9) {
-        guessCounter++
-        inquirer.prompt([
-            {
-            type: "input",
-            name: "guess",
-            message: "Select a Letter to Check"
-            }
-        ]).then((data) => {
-            currentWord.guessedWord(data.guess)
-            currentWord.displayWord()
-            game()
-        })
-    }   
-    else {
-        console.log("Out of Guesses")
+    if (currentWord.checkCounter !== currentWord.constructedWord.length) {
+        if (guessCounter < 9) {
+            guessCounter++
+            inquirer.prompt([
+                {
+                type: "input",
+                name: "guess",
+                message: "Select a Letter to Check"
+                }
+            ]).then((data) => {
+                currentWord.guessedWord(data.guess)
+                currentWord.displayWord()
+                game()
+            })
+        }  
+        else {
+            console.log("Out of Guesses")
+        } 
     }
+    else {
+        console.log("Yaaaaaaaay!")
+    }
+
 }
 
 game()
