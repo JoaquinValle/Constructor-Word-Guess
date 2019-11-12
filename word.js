@@ -22,7 +22,6 @@ var Word = function(newWord) {
             this.constructedWord[i].check(char)
             if (this.constructedWord[i].check(char)) {
                 this.checkCounter++
-                console.log(this.checkCounter)
             }
         }    
     }
