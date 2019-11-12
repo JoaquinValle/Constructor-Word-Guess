@@ -24,6 +24,7 @@ function game() {
         ]).then((data) => {
             currentWord.guessedWord(data.guess)
             currentWord.displayWord()
+            game()
         })
     }   
     else {
