@@ -3,15 +3,18 @@ var Letter = function(char) {
     this.guessed = false
     
     this.display = function() {
-        if (!this.guessed) {
+        if (this.char === " ") {
+            return " " 
+        }
+        else if (!this.guessed) {
             return "_"
         }
-        else {
+        else if (this.guessed) {
             return this.char
         }
     }
     this.check = function(userInput) {
-        if (userInput === char) {
+        if (userInput === this.char) {
             this.guessed = true
         }
     }

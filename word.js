@@ -5,20 +5,22 @@ var Word = function(newWord) {
     this.constructedWord = []
     this.makeWord = function() {
         for (let i = 0; i < this.newWord.length; i++) {
-            let singleLetter = new Letter(wordArr[i])
+            let singleLetter = new Letter(newWord[i])
             this.constructedWord.push(singleLetter)
         }
     }
     this.displayWord = function() {
-        this.currentGuessed = []
+        var currentGuessed = []
         for (let i in this.constructedWord) {
-            this.currentGuessed.push(this.constructedWord[i].display())
+            currentGuessed.push(this.constructedWord[i].display())
         }
         console.log(currentGuessed.join(" "))
     }
     this.guessedWord = function(char) {
-        for (let i in constructedWord) {
-            singleLetter.check()
+        for (let i in this.constructedWord) {
+            this.constructedWord[i].check(char)
         }    
     }
 }
+
+module.exports = Word
