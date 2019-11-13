@@ -6,30 +6,31 @@ var currentWord
 var guessCounter
 
 function startGame() {
-    var rand = Math.floor(Math.random() * (words.length + 1))
-    var randWord = words[rand]
-    console.log(randWord)
-    currentWord = new Word(randWord)
+        var rand = Math.floor(Math.random() * (words.length))
+        var randWord = words[rand]
+        var index = words.indexOf(randWord)
+        words.splice(index, 1)
+        console.log(randWord)
+        currentWord = new Word(randWord)
 
-    currentWord.makeWord()
-    currentWord.displayWord()
-    guessCounter = 0
-    game()
+        currentWord.makeWord()
+        currentWord.displayWord()
+        guessCounter = 0
+        game()
 }
 
 startGame()
 
-// var rand = Math.floor(Math.random() * (words.length + 1))
-// var randWord = words[rand]
-// console.log(randWord)
-// var currentWord = new Word(randWord)
-
-// currentWord.makeWord()
-// currentWord.displayWord()
-// var guessCounter = 0
-
 function game() {
-    if (currentWord.checkCounter !== currentWord.constructedWord.length) {
+    var lengthNoSpaces = 0
+    for (let i in currentWord.constructedWord) {
+        if (currentWord.constructedWord[i].char !== " ") {
+            lengthNoSpaces++
+        }
+    }
+    console.log(lengthNoSpaces)
+    console.log(currentWord.checkCounter)
+    if (currentWord.checkCounter !== lengthNoSpaces) {
         if (guessCounter < 9) {
             guessCounter++
             inquirer.prompt([
@@ -57,21 +58,26 @@ function game() {
 }
 
 function playAgain() {
-    inquirer.prompt([
-        {
-            type: "list",
-            name: "option",
-            message: "Play again?",
-            choices: ["Yes", "No"]
-        }
-    ]).then((answer) => {
-        if (answer.option === "Yes") {
-            startGame()
-        }
-        else {
-            console.log("No")
-        }
-    })
+    if (words.length < 1) {
+        console.log("All words completed. Thank you for playing!!!")
+    }
+    else {
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "option",
+                message: "Play again?",
+                choices: ["Yes", "No"]
+            }
+        ]).then((answer) => {
+            if (answer.option === "Yes") {
+                startGame()
+            }
+            else {
+                console.log("No")
+            }
+        })
+    }
 }
 
 
