@@ -20,19 +20,18 @@ function startGame() {
 }
 
 startGame()
+//var guessedArr = []
 
 function game() {
+    
     var lengthNoSpaces = 0
     for (let i in currentWord.constructedWord) {
         if (currentWord.constructedWord[i].char !== " ") {
             lengthNoSpaces++
         }
     }
-    console.log(lengthNoSpaces)
-    console.log(currentWord.checkCounter)
     if (currentWord.checkCounter !== lengthNoSpaces) {
         if (guessCounter < 9) {
-            guessCounter++
             inquirer.prompt([
                 {
                 type: "input",
@@ -40,18 +39,28 @@ function game() {
                 message: "Select a Letter to Check"
                 }
             ]).then((data) => {
+
+                // if (guessedArr.includes(data.guess)) {
+                //     console.log("Letter already guessed. Please choose another letter")
+                // }
+                //else {
+                guessCounter++
                 currentWord.guessedWord(data.guess)
                 currentWord.displayWord()
+                //guessedArr.push(data.guess)
                 game()
+               // }
             })
         }  
         else {
             console.log("Out of Guesses")
+            var guessedArr = []
             playAgain()
         } 
     }
     else {
         console.log("Yaaaaaaaay!")
+        var guessedArr = []
         playAgain()
     }
 
@@ -79,5 +88,3 @@ function playAgain() {
         })
     }
 }
-
-
